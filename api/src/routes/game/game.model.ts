@@ -1,13 +1,23 @@
 import { Model, snakeCaseMappers } from 'objection';
 import Category from '../category/category.model';
+import Weapon from '../weapon/weapon.model';
 
 export default class Game extends Model {
+    gameId: number;
+
     static get columnNameMappers() {
         return snakeCaseMappers();
     }
 
     static get tableName() {
         return 'game';
+    }
+
+    static jsonSchema = {
+        type: 'object',
+        properties: {
+            game_id: { type: 'integer' }
+        }
     }
 
     static relationMappings = {
@@ -22,6 +32,14 @@ export default class Game extends Model {
                     to: 'game_weapon_category.weapon_category_id'
                 },
                 to: 'weapon_category.weapon_category_id'
+            }
+        },
+        weapons: {
+            relation: Model.HasManyRelation,
+            modelClass: Weapon,
+            join: {
+                from: 'game.game_id',
+                to: 'weapon.game_id'
             }
         }
     };
