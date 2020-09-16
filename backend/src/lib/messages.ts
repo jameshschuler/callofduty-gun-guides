@@ -1,0 +1,1 @@
+export const INVALID_GAME_ID = ( id: string ) => `Invalid game Id: ${id}`;
