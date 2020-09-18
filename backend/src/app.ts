@@ -1,4 +1,5 @@
 import compression from 'compression';
+import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import Knex from 'knex';
@@ -19,6 +20,7 @@ app.use( morgan( 'tiny' ) );
 app.use( compression() );
 app.use( helmet() );
 app.use( express.json() );
+app.use( cors() );
 
 app.get( '/', ( req: express.Request, res: express.Response ) => {
     res.json( {

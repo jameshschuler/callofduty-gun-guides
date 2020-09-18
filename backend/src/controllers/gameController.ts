@@ -1,7 +1,7 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
 import validator from 'validator';
-import { INVALID_GAME_ID } from '../lib/messages';
+import { INVALID_CATEGORY_ID, INVALID_GAME_ID, INVALID_WEAPON_ID } from '../lib/messages';
 import Game from '../models/game';
 import WeaponModel from '../models/weapon';
 import CategoryService from '../services/categoryService';
@@ -51,7 +51,7 @@ router.get( '/:gameId/category/:categoryId/weapon', async ( req: express.Request
     }
 
     if ( !isValidId( categoryId ) ) {
-        res.status( StatusCodes.BAD_REQUEST ).json( { message: `Invalid category Id: ${categoryId}` } );
+        res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_CATEGORY_ID( categoryId ) } );
         return;
     }
 
@@ -82,12 +82,12 @@ router.get( '/:gameId/category/:categoryId/weapon/:weaponId', async ( req: expre
     }
 
     if ( !isValidId( categoryId ) ) {
-        res.status( StatusCodes.BAD_REQUEST ).json( { message: `Invalid category Id: ${categoryId}` } );
+        res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_CATEGORY_ID( categoryId ) } );
         return;
     }
 
     if ( !isValidId( weaponId ) ) {
-        res.status( StatusCodes.BAD_REQUEST ).json( { message: `Invalid weapon Id: ${weaponId}` } );
+        res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_WEAPON_ID( weaponId ) } );
         return;
     }
 
