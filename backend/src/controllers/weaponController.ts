@@ -25,4 +25,15 @@ router.get( '/:weaponId/attachment', async ( req: express.Request, res: express.
     }
 } );
 
+router.get( '/:weaponId/guide', async ( req: express.Request, res: express.Response ) => {
+    const weaponId = req.params.weaponId;
+    if ( !isValidId( weaponId ) ) {
+        res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_WEAPON_ID( weaponId ) } );
+        return;
+    }
+
+    const weaponGuides = await weaponService.getWeaponGuides( parseInt( weaponId ) );
+    res.json( weaponGuides );
+} );
+
 export default router;

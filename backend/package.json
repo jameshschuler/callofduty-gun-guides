@@ -12,8 +12,6 @@
     "test:watch": "jest --watch"
   },
   "jest": {
-    "globalSetup": "./src/setupTests.ts",
-    "globalTeardown": "./src/teardownTests.ts",
     "moduleFileExtensions": [
       "ts",
       "tsx",

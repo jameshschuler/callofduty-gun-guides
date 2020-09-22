@@ -1,6 +1,8 @@
-import Attachment from 'src/models/attachment';
-import WeaponAttachmentResponse from 'src/types/response/weaponAttachmentResponse';
+import Attachment from '../models/attachment';
+import Guide from '../models/guide';
 import Weapon from '../models/weapon';
+import WeaponAttachmentResponse from '../types/response/weaponAttachmentResponse';
+import { WeaponGuideResponse } from '../types/response/weaponGuideResponse';
 
 export default class WeaponService {
     async getWeaponAttachments( weaponId: number ): Promise<WeaponAttachmentResponse[]> {
@@ -23,5 +25,23 @@ export default class WeaponService {
         } );
 
         return response;
+    }
+
+    async getWeaponGuides( weaponId: number ): Promise<WeaponGuideResponse[]> {
+        const guides = await Guide.query().where( 'primary_weapon_id', '=', weaponId );
+
+        if ( guides && guides.length > 0 ) {
+            return guides.map( ( guide: Guide ) => {
+                return {
+                    guideId: guide.guideId,
+                    name: guide.name,
+                    createdBy: guide.createdBy,
+                    videoUrl: guide.videoUrl,
+                    sourceUrl: guide.sourceUrl,
+                } as WeaponGuideResponse
+            } );
+        }
+
+        return [];
     }
 }

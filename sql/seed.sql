@@ -12,13 +12,13 @@ insert into weapon_category (name) values ('Shotguns');
 insert into weapon_category (name) values ('Launchers');
 insert into weapon_category (name) values ('Melee');
 
--- Weapons (Blackops 4)
+-- Weapons (Black Ops 4)
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('ICR-7', 0, 1, 1);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('Rampart 17', 10, 1, 1);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('MX9', 1, 1, 2);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('GKS', 13, 1, 2);
 
--- Game Weapon Categories (Blackops 4)
+-- Game Weapon Categories (Black Ops 4)
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 1);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 2);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 3);
@@ -29,7 +29,7 @@ insert into game_weapon_category(game_id, weapon_category_id) values (1, 7);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 8);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 9);
 
--- Perks (Blackops 4)
+-- Perks (Black Ops 4)
 insert into perk(name, unlock_level, game_id, tier) values ('Scavenger', 1, 1, 1);
 insert into perk(name, unlock_level, game_id, tier) values ('Engineer', 1, 1, 1);
 insert into perk(name, unlock_level, game_id, tier) values ('Flak Jacket', 12, 1, 1);
@@ -46,7 +46,45 @@ insert into perk(name, unlock_level, game_id, tier) values ('Team Link', 1, 1, 3
 insert into perk(name, unlock_level, game_id, tier) values ('Dead Silence', 18, 1, 3);
 insert into perk(name, unlock_level, game_id, tier) values ('Tracker', 36, 1, 3);
 
--- Equipment TypesK
+-- Equipment Types
 insert into equipment_type(name) values ('Lethal');
 insert into equipment_type(name) values ('Tactical');
 insert into equipment_type(name) values ('Other');
+
+-- Attachments
+
+-- Optics
+insert into attachment(name, game_id, is_optic) values ('Reflex', 1, true);
+insert into attachment(name, game_id, is_optic) values ('Recon', 1, true);
+insert into attachment(name, game_id, is_optic) values ('Holographic', 1, true);
+insert into attachment(name, game_id, is_optic) values ('Dual Zoom', 1, true);
+insert into attachment(name, game_id, is_optic) values ('Threat Detector', 1, true);
+insert into attachment(name, game_id, is_optic) values ('NVIR', 1, true);
+
+-- Other
+insert into attachment(name, game_id, is_optic) values ('Long Barrel I', 1, false);
+insert into attachment(name, game_id, is_optic) values ('FMJ I', 1, false);
+insert into attachment(name, game_id, is_optic) values ('Grip I', 1, false);
+insert into attachment(name, game_id, is_optic) values ('Grip II', 1, false);
+insert into attachment(name, game_id, is_optic) values ('Laser Sight I', 1, false);
+insert into attachment(name, game_id, is_optic) values ('Quick Draw I', 1, false);
+
+-- ICR - weapon id: 1
+insert into weapon_attachment(weapon_id, attachment_id, unlock_level) values (1, 1, null);
+insert into weapon_attachment(weapon_id, attachment_id, unlock_level) values (1, 2, null);
+
+-- Gear
+-- Black Ops 4
+insert into gear(name, unlock_level, game_id) values ('Equipment Charge', null, 1);
+insert into gear(name, unlock_level, game_id) values ('Stim Shot', null, 1);
+insert into gear(name, unlock_level, game_id) values ('Comsec Device', null, 1);
+insert into gear(name, unlock_level, game_id) values ('Body Armor', null, 1);
+insert into gear(name, unlock_level, game_id) values ('Acoustic Sensor', null, 1);
+
+-- Equipment 
+insert into equipment(name, unlock_level, equipment_type_id) values ('Trophy System', null, 2);
+insert into equipment(name, unlock_level, equipment_type_id) values ('Combat Axe', null, 1);
+insert into equipment(name, unlock_level, equipment_type_id) values ('Frag', null, 1);
+insert into equipment(name, unlock_level, equipment_type_id) values ('Molotov', null, 1);
+insert into equipment(name, unlock_level, equipment_type_id) values ('Concussion', null, 2);
+insert into equipment(name, unlock_level, equipment_type_id) values ('Special Issue', null, 3);

@@ -1,6 +1,6 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
-import validator from 'validator';
+import { isValidId } from '../lib/customValidation';
 import { INVALID_CATEGORY_ID, INVALID_GAME_ID, INVALID_WEAPON_ID } from '../lib/messages';
 import Game from '../models/game';
 import WeaponModel from '../models/weapon';
@@ -124,12 +124,5 @@ router.get( '/:gameId/weapon', async ( req: express.Request, res: express.Respon
     }
 } );
 
-/**
- * 
- * @param id 
- */
-function isValidId( id: string ) {
-    return ( id && validator.isNumeric( id ) );
-}
 
 export default router;
