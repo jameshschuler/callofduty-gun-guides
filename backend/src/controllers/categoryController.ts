@@ -17,7 +17,7 @@ export default class CategoryController {
         );
     }
 
-    public get router() {
+    public get router () {
         return this._router;
     }
 }

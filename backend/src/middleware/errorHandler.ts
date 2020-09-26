@@ -1,4 +1,5 @@
 import express from 'express';
+import { CustomError } from '../types/errors';
 
 const errorTypes: any[ number ] = {
     ValidationError: 422,
@@ -9,11 +10,7 @@ const errorMessages: any[ string ] = {
     UniqueViolationError: 'Already exists.',
 };
 
-interface CustomError extends Error {
-    errors: any;
-}
-
-function errorHandler( error: CustomError, req: express.Request, res: express.Response, next: any ) {
+function errorHandler ( error: CustomError, req: express.Request, res: express.Response, next: any ) {
     const statusCode = res.statusCode === 200 ? errorTypes[ error.name ] || 500 : res.statusCode;
     res.status( statusCode );
     res.json( {
