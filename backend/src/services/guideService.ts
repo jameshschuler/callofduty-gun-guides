@@ -1,4 +1,10 @@
+import Attachment from 'src/models/attachment';
+import Wildcard from 'src/models/wildcard';
+import Equipment from '../models/equipment';
+import Gear from '../models/gear';
 import Guide from '../models/guide';
+import Perk from '../models/perk';
+import Weapon from '../models/weapon';
 import { GuideResponse } from '../types/response/guideResponse';
 
 export default class GuideService {
@@ -11,9 +17,14 @@ export default class GuideService {
             throw new Error( `Guide not found for id: ${guideId}` );
         }
 
-        const equipment = await guide.$relatedQuery( 'equipment' );
-        const gear = await guide.$relatedQuery( 'gear' );
-        const primaryWeapon = await guide.$relatedQuery( 'primaryWeapon' );
+        const equipment = await guide.$relatedQuery<Equipment>( 'equipment' ).first();
+        const gear = await guide.$relatedQuery<Gear>( 'gear' ).first();
+        const primaryWeapon = await guide.$relatedQuery<Weapon>( 'primaryWeapon' ).first();
+        const secondaryWeapon = await guide.$relatedQuery<Weapon>( 'secondaryWeapon' ).first();
+        const perks = await guide.$relatedQuery<Perk>( 'perks' );
+        const wildcards = await guide.$relatedQuery<Wildcard>( 'wildcards' );
+        const primaryOptic = await guide.$relatedQuery<Attachment>( 'primaryOptic' ).first();
+        const secondaryOptic = await guide.$relatedQuery<Attachment>( 'secondaryOptic' ).first();
 
         return {
             guideId: guide.guideId,
@@ -21,9 +32,14 @@ export default class GuideService {
             createdBy: guide.createdBy,
             videoUrl: guide.videoUrl,
             sourceUrl: guide.sourceUrl,
-            equipment: ( equipment as any ).name,
-            gear: ( gear as any ).name,
-            primaryWeapon: ( primaryWeapon as any ).name
+            equipment: equipment?.name,
+            gear: gear.name,
+            primaryWeapon: primaryWeapon?.name,
+            secondaryWeapon: secondaryWeapon?.name,
+            perks: perks?.map( e => e.name ),
+            wildcards: wildcards?.map( e => e.name ),
+            primaryOptic: primaryOptic?.name,
+            secondaryOptic: secondaryOptic?.name
         } as GuideResponse;
     }
 }

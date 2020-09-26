@@ -1,7 +1,12 @@
 import Category from '../models/category';
 
 export default class CategoryService {
-    async getCategory( categoryId: number ): Promise<Category> {
+    public async getAll(): Promise<Category[]> {
+        const categories = await Category.query();
+        return categories;
+    }
+
+    public async getCategory( categoryId: number ): Promise<Category> {
         const category = await Category.query().findOne( {
             weapon_category_id: categoryId
         } );

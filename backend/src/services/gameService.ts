@@ -1,3 +1,4 @@
+import Category from '../models/category';
 import Game from '../models/game';
 
 export default class GameService {
@@ -5,7 +6,12 @@ export default class GameService {
 
     }
 
-    async getGame( gameId: number ): Promise<Game> {
+    public async getAll(): Promise<Game[]> {
+        const games = await Game.query();
+        return games;
+    }
+
+    public async getGame( gameId: number ): Promise<Game> {
         const game = await Game.query().findOne( {
             game_id: gameId
         } );
@@ -15,5 +21,12 @@ export default class GameService {
         }
 
         return game;
+    }
+
+    public async getGameCategories( gameId: number ): Promise<Category[]> {
+        const game = await this.getGame( gameId );
+        const categories = await game.$relatedQuery<Category>( 'categories' );
+
+        return categories;
     }
 }

@@ -7,7 +7,11 @@ export type GuideResponse = {
     gear: string;
     equipment: string;
     primaryWeapon: string;
-    secondary: string;
+    secondaryWeapon: string;
     primaryOptic: string;
     secondaryOptic: string;
+    perks: string[];
+    wildcards: string[];
+    primaryWeaponAttachments: string[];
+    secondaryWeaponAttachments: string[];
 }

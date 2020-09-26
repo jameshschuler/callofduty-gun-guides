@@ -81,10 +81,30 @@ insert into gear(name, unlock_level, game_id) values ('Comsec Device', null, 1);
 insert into gear(name, unlock_level, game_id) values ('Body Armor', null, 1);
 insert into gear(name, unlock_level, game_id) values ('Acoustic Sensor', null, 1);
 
--- Equipment 
+-- Equipment
+-- Black Ops 4 
 insert into equipment(name, unlock_level, equipment_type_id) values ('Trophy System', null, 2);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Combat Axe', null, 1);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Frag', null, 1);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Molotov', null, 1);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Concussion', null, 2);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Special Issue', null, 3);
+
+-- Wildcards
+-- Black Ops 4
+insert into wildcard(name, unlock_level, game_id) values ('Perk 1 Greed', 11, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Perk 2 Greed', 14, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Perk 3 Greed', 17, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Overkill', 20, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Underkill', 50, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Primary Gunfighter 1', 0, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Primary Gunfighter 2', 23, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Primary Gunfighter 3', 32, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Primary Operator Mod', 0, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Secondary Operator Mod', 0, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Secondary Gunfighter 1', 0, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Secondary Gunfighter 2', 26, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Secondary Gunfighter 3', 35, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Perk 1 Gluttony', 38, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Perk 2 Gluttony', 44, 1);
+insert into wildcard(name, unlock_level, game_id) values ('Perk 3 Gluttony', 47, 1);

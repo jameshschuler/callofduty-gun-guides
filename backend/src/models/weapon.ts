@@ -2,6 +2,8 @@ import { Model, snakeCaseMappers } from 'objection';
 import Attachment from './attachment';
 
 export default class Weapon extends Model {
+    name: string;
+
     static get columnNameMappers() {
         return snakeCaseMappers();
     }
