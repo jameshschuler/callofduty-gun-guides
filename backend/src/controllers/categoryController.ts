@@ -1,11 +1,22 @@
-import express from 'express';
+import express, { Router } from 'express';
 import Category from '../models/category';
 
-const router = express.Router();
+export default class CategoryController {
+    private _router: Router;
 
-router.get( '/', async ( req: express.Request, res: express.Response ) => {
-    const categories = await Category.query();
-    res.json( categories );
-} );
+    constructor() {
+        this._router = express.Router();
 
-export default router;
+        this._router.get(
+            '/',
+            async ( req: express.Request, res: express.Response ) => {
+                const categories = await Category.query();
+                res.json( categories );
+            }
+        );
+    }
+
+    public get router () {
+        return this._router;
+    }
+}
