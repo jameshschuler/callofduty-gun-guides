@@ -12,7 +12,7 @@ export default class WeaponService {
 
     }
 
-    public async getWeaponByCategory ( gameId: number, categoryId: number, weaponId: number ): Promise<WeaponResponse> {
+    public async getWeaponByCategory( gameId: number, categoryId: number, weaponId: number ): Promise<WeaponResponse> {
         const game = await Game.query().findOne( { game_id: gameId } );
         if ( !game ) {
             throw new Error( `Game not found for id: ${gameId}` );
@@ -36,7 +36,7 @@ export default class WeaponService {
         };
     }
 
-    public async getWeaponsByCategory ( gameId: number, categoryId: number ): Promise<WeaponResponse[]> {
+    public async getWeaponsByCategory( gameId: number, categoryId: number ): Promise<WeaponResponse[]> {
         const game = await Game.query().findOne( { game_id: gameId } );
         if ( !game ) {
             throw new Error( `Game not found for id: ${gameId}` );
@@ -56,7 +56,7 @@ export default class WeaponService {
         } ) as WeaponResponse[];
     }
 
-    public async getWeaponAttachments ( weaponId: number ): Promise<WeaponAttachmentResponse[]> {
+    public async getWeaponAttachments( weaponId: number ): Promise<WeaponAttachmentResponse[]> {
         const weapon = await Weapon.query().findOne( {
             weapon_id: weaponId
         } );
@@ -78,7 +78,7 @@ export default class WeaponService {
         return response;
     }
 
-    public async getWeaponGuides ( weaponId: number ): Promise<WeaponGuideResponse[]> {
+    public async getWeaponGuides( weaponId: number ): Promise<WeaponGuideResponse[]> {
         const guides = await Guide.query().where( 'primary_weapon_id', '=', weaponId );
 
         if ( guides && guides.length > 0 ) {

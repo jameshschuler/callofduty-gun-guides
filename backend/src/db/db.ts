@@ -20,12 +20,11 @@ const config = {
         client: 'pg',
         useNullAsDefault: true,
         connection: {
-            database: process.env.POSTGRES_DB,
-            user: process.env.POSTGRES_USER,
-            password: process.env.POSTGRES_PASSWORD,
-            port: process.env.POSTGRES_PORT,
-            host: process.env.POSTGRES_HOST,
-            ssl: true
+            database: process.env.TEST_POSTGRES_DB,
+            user: process.env.TEST_POSTGRES_USER,
+            password: process.env.TEST_POSTGRES_PASSWORD,
+            port: process.env.TEST_POSTGRES_PORT,
+            host: process.env.TEST_POSTGRES_HOST,
         } as PgConnectionConfig
     }
 } as any[ string ];

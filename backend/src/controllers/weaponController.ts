@@ -14,7 +14,7 @@ export default class WeaponController {
         this._router = express.Router();
 
         this._router.get( '/:weaponId/attachment', async ( req: express.Request, res: express.Response ) => {
-            const weaponId = req.params.weaponId;
+            const { weaponId } = req.params;
             if ( !isValidId( weaponId ) ) {
                 res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_WEAPON_ID( weaponId ) } );
                 return;
@@ -40,7 +40,7 @@ export default class WeaponController {
         } );
     }
 
-    public get router () {
+    public get router() {
         return this._router;
     }
 }
