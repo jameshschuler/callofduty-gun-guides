@@ -2,18 +2,17 @@ import express, { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { isValidId } from '../lib/customValidation';
 import { INVALID_CATEGORY_ID, INVALID_GAME_ID, INVALID_WEAPON_ID } from '../lib/messages';
-import WeaponModel from '../models/weapon';
-import CategoryService from '../services/categoryService';
 import GameService from '../services/gameService';
+import WeaponService from '../services/weaponService';
 
 export default class GameController {
     private _router: Router;
     private _gameService: GameService;
-    private _categoryService: CategoryService;
+    private _weaponService: WeaponService;
 
-    constructor( gameService: GameService, categoryService: CategoryService ) {
+    constructor( gameService: GameService, weaponService: WeaponService ) {
         this._gameService = gameService;
-        this._categoryService = categoryService;
+        this._weaponService = weaponService;
 
         this._router = express.Router();
 
@@ -42,7 +41,7 @@ export default class GameController {
         } );
 
         /**
-         * 
+         * Get all weapons of a category for a given game
          */
         this._router.get( '/:gameId/category/:categoryId/weapon', async ( req: express.Request, res: express.Response ) => {
             const gameId = req.params.gameId;
@@ -59,12 +58,7 @@ export default class GameController {
             }
 
             try {
-                const game = await this._gameService.getGame( parseInt( gameId ) );
-                const category = await this._categoryService.getCategory( parseInt( categoryId ) );
-
-                const weapons = await WeaponModel.query()
-                    .where( 'game_id', '=', game.gameId )
-                    .where( 'weapon_category_id', '=', category.weaponCategoryId );
+                const weapons = await this._weaponService.getWeaponsByCategory( parseInt( gameId ), parseInt( categoryId ) );
                 res.json( weapons );
             } catch ( err ) {
                 res.status( StatusCodes.NOT_FOUND ).json( { message: err.message } );
@@ -75,9 +69,7 @@ export default class GameController {
          * 
          */
         this._router.get( '/:gameId/category/:categoryId/weapon/:weaponId', async ( req: express.Request, res: express.Response ) => {
-            const gameId = req.params.gameId;
-            const categoryId = req.params.categoryId;
-            const weaponId = req.params.weaponId;
+            const { gameId, categoryId, weaponId } = req.params;
 
             if ( !isValidId( gameId ) ) {
                 res.status( StatusCodes.BAD_REQUEST ).json( { message: INVALID_GAME_ID( gameId ) } );
@@ -95,13 +87,11 @@ export default class GameController {
             }
 
             try {
-                const game = await this._gameService.getGame( parseInt( gameId ) );
-                const category = await this._categoryService.getCategory( parseInt( categoryId ) );
-
-                const weapon = await WeaponModel.query()
-                    .where( 'game_id', '=', game.gameId )
-                    .where( 'weapon_category_id', '=', category.weaponCategoryId )
-                    .where( 'weapon_id', '=', weaponId );
+                const weapon = await this._weaponService.getWeaponByCategory(
+                    parseInt( gameId ),
+                    parseInt( categoryId ),
+                    parseInt( weaponId )
+                )
                 res.json( weapon );
             } catch ( err ) {
                 res.status( StatusCodes.NOT_FOUND ).json( { message: err.message } );
@@ -128,7 +118,7 @@ export default class GameController {
         } );
     }
 
-    public get router() {
+    public get router () {
         return this._router;
     }
 }

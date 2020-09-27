@@ -20,7 +20,7 @@ router.get( '/', ( req: express.Request, res: express.Response ) => {
     } );
 } );
 
-router.use( '/game', new GameController( gameService, categoryService ).router );
+router.use( '/game', new GameController( gameService, weaponService ).router );
 router.use( '/category', new CategoryController( categoryService ).router );
 router.use( '/weapon', new weaponController( weaponService ).router );
 router.use( '/guide', new GuideController( guideService ).router );
