@@ -33,3 +33,25 @@ describe( 'GET weapon/:weaponId/attachment', () => {
         expect( response.body.message ).toBe( `Invalid weapon Id: ${weaponId}` );
     } );
 } );
+
+describe( 'GET weapon/:weaponId/guide', () => {
+    it( 'should respond with an array of guides', async () => {
+        const weaponId = 1;
+        const response = await supertest( app )
+            .get( `/api/v1/weapon/${weaponId}/guide` )
+            .expect( 'Content-Type', /json/ )
+            .expect( 200 );
+        expect( response.body ).toBeInstanceOf( Array );
+    } );
+
+    it( 'should respond with invalid weapon id error', async () => {
+        const weaponId = -1;
+        const response = await supertest( app )
+            .get( `/api/v1/weapon/${weaponId}/guide` )
+            .expect( 'Content-Type', /json/ )
+            .expect( 400 );
+
+        expect( response.body ).toBeInstanceOf( Object );
+        expect( response.body.message ).toBe( `Invalid weapon Id: ${weaponId}` );
+    } );
+} );

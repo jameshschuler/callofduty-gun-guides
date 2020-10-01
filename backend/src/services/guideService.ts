@@ -25,6 +25,8 @@ export default class GuideService {
         const wildcards = await guide.$relatedQuery<Wildcard>( 'wildcards' );
         const primaryOptic = await guide.$relatedQuery<Attachment>( 'primaryOptic' ).first();
         const secondaryOptic = await guide.$relatedQuery<Attachment>( 'secondaryOptic' ).first();
+        const primaryWeaponAttachments = await guide.$relatedQuery<Attachment>( 'primaryWeaponAttachments' );
+        const secondaryWeaponAttachments = await guide.$relatedQuery<Attachment>( 'secondaryWeaponAttachments' );
 
         return {
             guideId: guide.guideId,
@@ -39,7 +41,9 @@ export default class GuideService {
             perks: perks?.map( e => e.name ),
             wildcards: wildcards?.map( e => e.name ),
             primaryOptic: primaryOptic?.name,
-            secondaryOptic: secondaryOptic?.name
+            secondaryOptic: secondaryOptic?.name,
+            primaryWeaponAttachments: primaryWeaponAttachments.map( e => e.name ),
+            secondaryWeaponAttachments: secondaryWeaponAttachments.map( e => e.name )
         } as GuideResponse;
     }
 }

@@ -8,10 +8,6 @@ import { WeaponGuideResponse } from '../types/response/weaponGuideResponse';
 import { WeaponResponse } from '../types/response/weaponResponse';
 
 export default class WeaponService {
-    constructor() {
-
-    }
-
     public async getWeaponByCategory( gameId: number, categoryId: number, weaponId: number ): Promise<WeaponResponse> {
         const game = await Game.query().findOne( { game_id: gameId } );
         if ( !game ) {
@@ -51,9 +47,7 @@ export default class WeaponService {
             .where( 'game_id', '=', game.gameId )
             .where( 'weapon_category_id', '=', category.weaponCategoryId );
 
-        return weapons.map( e => {
-            return { name: e.name }
-        } ) as WeaponResponse[];
+        return weapons.map( e => { return { name: e.name } } ) as WeaponResponse[];
     }
 
     public async getWeaponAttachments( weaponId: number ): Promise<WeaponAttachmentResponse[]> {

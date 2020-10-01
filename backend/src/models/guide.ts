@@ -70,13 +70,38 @@ export default class Guide extends Model {
                 to: 'attachment.attachment_id'
             }
         },
+        primaryWeaponAttachments: {
+            relation: Model.ManyToManyRelation,
+            modelClass: Attachment,
+            join: {
+                from: 'guide.guide_id',
+                through: {
+                    // persons_movies is the join table.
+                    from: 'guide_primary_weapon_attachment.guide_id',
+                    to: 'guide_primary_weapon_attachment.attachment_id'
+                },
+                to: 'attachment.attachment_id'
+            }
+        },
+        secondaryWeaponAttachments: {
+            relation: Model.ManyToManyRelation,
+            modelClass: Attachment,
+            join: {
+                from: 'guide.guide_id',
+                through: {
+                    // persons_movies is the join table.
+                    from: 'guide_secondary_weapon_attachment.guide_id',
+                    to: 'guide_secondary_weapon_attachment.attachment_id'
+                },
+                to: 'attachment.attachment_id'
+            }
+        },
         perks: {
             relation: Model.ManyToManyRelation,
             modelClass: Perk,
             join: {
                 from: 'guide.guide_id',
                 through: {
-                    // persons_movies is the join table.
                     from: 'guide_perk.guide_id',
                     to: 'guide_perk.perk_id'
                 },
@@ -89,7 +114,6 @@ export default class Guide extends Model {
             join: {
                 from: 'guide.guide_id',
                 through: {
-                    // persons_movies is the join table.
                     from: 'guide_wildcard.guide_id',
                     to: 'guide_wildcard.wildcard_id'
                 },
