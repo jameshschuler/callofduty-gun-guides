@@ -19,7 +19,7 @@ const app = express();
 app.use( morgan( 'tiny' ) );
 app.use( compression() );
 app.use( helmet() );
-app.use( express.json() );
+app.use( express.json( { type: 'application/json' } ) );
 app.use( cors() );
 
 app.get( '/', ( req: express.Request, res: express.Response ) => {

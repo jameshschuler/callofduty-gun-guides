@@ -167,3 +167,13 @@ CREATE TABLE guide_secondary_weapon_attachment (
 	FOREIGN KEY (guide_id) REFERENCES guide (guide_id) ON DELETE CASCADE,
 	FOREIGN KEY (attachment_id) REFERENCES attachment (attachment_id) ON DELETE CASCADE
 );
+
+CREATE TABLE api_key (
+	api_key_id serial PRIMARY KEY,
+	api_key VARCHAR NOT NULL,
+	username VARCHAR(100) NOT NULL,
+	is_admin BOOLEAN NOT NULL DEFAULT false,
+	expiration_date TIMESTAMP,
+	created_on TIMESTAMP NOT NULL default current_timestamp,
+    updated_on TIMESTAMP
+);

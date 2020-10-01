@@ -28,7 +28,8 @@ export default class WeaponService {
         }
 
         return {
-            name: weapon.name
+            name: weapon.name,
+            unlockLevel: weapon.unlockLevel
         };
     }
 
@@ -47,7 +48,7 @@ export default class WeaponService {
             .where( 'game_id', '=', game.gameId )
             .where( 'weapon_category_id', '=', category.weaponCategoryId );
 
-        return weapons.map( e => { return { name: e.name } } ) as WeaponResponse[];
+        return weapons.map( e => { return { name: e.name, unlockLevel: e.unlockLevel } } ) as WeaponResponse[];
     }
 
     public async getWeaponAttachments( weaponId: number ): Promise<WeaponAttachmentResponse[]> {

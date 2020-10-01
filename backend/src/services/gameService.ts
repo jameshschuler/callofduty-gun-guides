@@ -1,3 +1,5 @@
+import Weapon from 'src/models/weapon';
+import { WeaponResponse } from 'src/types/response/weaponResponse';
 import Category from '../models/category';
 import Game from '../models/game';
 
@@ -23,10 +25,17 @@ export default class GameService {
         return game;
     }
 
-    public async getGameCategories( gameId: number ): Promise<Category[]> {
+    public async getGameCategories( gameId: number ): Promise<string[]> {
         const game = await this.getGame( gameId );
         const categories = await game.$relatedQuery<Category>( 'categories' );
 
-        return categories;
+        return categories.map( e => e.name );
+    }
+
+    public async getAllWeapons( gameId: number ): Promise<WeaponResponse[]> {
+        const game = await this.getGame( gameId );
+        const weapons = await game.$relatedQuery<Weapon>( 'weapons' );
+
+        return weapons.map( e => { return { name: e.name, unlockLevel: e.unlockLevel } } ) as WeaponResponse[];
     }
 }

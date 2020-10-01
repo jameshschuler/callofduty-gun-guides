@@ -24,7 +24,7 @@ export default class GameController {
         } );
 
         /**
-         * 
+         * Get all weapons categories for a given game
          */
         this._router.get( '/:gameId/category', async ( req: express.Request, res: express.Response ) => {
             const gameId = req.params.gameId;
@@ -87,11 +87,7 @@ export default class GameController {
             }
 
             try {
-                const weapon = await this._weaponService.getWeaponByCategory(
-                    parseInt( gameId ),
-                    parseInt( categoryId ),
-                    parseInt( weaponId )
-                )
+                const weapon = await this._weaponService.getWeaponByCategory( parseInt( gameId ), parseInt( categoryId ), parseInt( weaponId ) );
                 res.json( weapon );
             } catch ( err ) {
                 res.status( StatusCodes.NOT_FOUND ).json( { message: err.message } );
@@ -109,8 +105,7 @@ export default class GameController {
             }
 
             try {
-                const game = await this._gameService.getGame( parseInt( gameId ) );
-                const weapons = await game.$relatedQuery( 'weapons' );
+                const weapons = await this._gameService.getAllWeapons( parseInt( gameId ) );
                 res.json( weapons );
             } catch ( err ) {
                 res.status( StatusCodes.NOT_FOUND ).json( { message: err.message } );
@@ -118,7 +113,7 @@ export default class GameController {
         } );
     }
 
-    public get router () {
+    public get router() {
         return this._router;
     }
 }

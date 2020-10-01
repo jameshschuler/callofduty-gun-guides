@@ -3,6 +3,7 @@ import Attachment from './attachment';
 
 export default class Weapon extends Model {
     name: string;
+    unlockLevel: number;
 
     static get columnNameMappers() {
         return snakeCaseMappers();

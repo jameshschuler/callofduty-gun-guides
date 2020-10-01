@@ -1,5 +1,5 @@
 import supertest from 'supertest';
-import app from '../app';
+import app from '../../app';
 
 describe( 'GET weapon/:weaponId/attachment', () => {
     it( 'should respond with an array of weapon attachments', async () => {
