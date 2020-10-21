@@ -2,13 +2,14 @@ import bcrypt from 'bcrypt';
 import cryptoRandomString from 'crypto-random-string';
 import { StatusCodes } from 'http-status-codes';
 import validator from 'validator';
+import { INVALID_API_KEY } from '../lib/messages';
 import APIKey from '../models/apiKey';
 import { AppError } from '../types/errors';
 import { GenerateAPIKeyRequest } from '../types/request/generateAPIKeyRequest';
 import { GenerateAPIKeyResponse } from '../types/response/generateAPIKeyResponse';
 
 export default class APIKeyService {
-    public async generateAPIKey( { username }: GenerateAPIKeyRequest ): Promise<GenerateAPIKeyResponse> {
+    public async generateAPIKey ( { username }: GenerateAPIKeyRequest ): Promise<GenerateAPIKeyResponse> {
         if ( validator.isEmpty( username ) ) {
             throw new AppError( `Must enter a username`, StatusCodes.BAD_REQUEST );
         }
@@ -39,11 +40,11 @@ export default class APIKeyService {
         }
     }
 
-    public async verifyAPIKey( apiKey: string, forCreate: boolean = false ) {
+    public async verifyAPIKey ( apiKey: string, forCreate: boolean = false ) {
         const existingAPIKey = await APIKey.query().findOne( { api_key: apiKey } );
 
         if ( !existingAPIKey ) {
-            throw new AppError( 'Invalid API key.', StatusCodes.BAD_REQUEST );
+            throw new AppError( INVALID_API_KEY, StatusCodes.BAD_REQUEST );
         }
 
         if ( validator.isAfter( new Date().toString(), existingAPIKey.expirationDate.toString() ) ) {
@@ -52,7 +53,7 @@ export default class APIKeyService {
 
         if ( forCreate ) {
             if ( !existingAPIKey.isAdmin ) {
-                throw new AppError( 'Invalid API key.', StatusCodes.BAD_REQUEST );
+                throw new AppError( INVALID_API_KEY, StatusCodes.BAD_REQUEST );
             }
         }
     }

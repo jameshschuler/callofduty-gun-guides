@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import Attachment from 'src/models/attachment';
 import Wildcard from 'src/models/wildcard';
 import Equipment from '../models/equipment';
@@ -5,16 +6,17 @@ import Gear from '../models/gear';
 import Guide from '../models/guide';
 import Perk from '../models/perk';
 import Weapon from '../models/weapon';
+import { AppError } from '../types/errors';
 import { GuideResponse } from '../types/response/guideResponse';
 
 export default class GuideService {
-    async getGuide( guideId: number ): Promise<GuideResponse> {
+    async getGuide ( guideId: number ): Promise<GuideResponse> {
         const guide = await Guide.query().findOne( {
             guide_id: guideId
         } );
 
         if ( !guide ) {
-            throw new Error( `Guide not found for id: ${guideId}` );
+            throw new AppError( `Guide not found for id: ${guideId}`, StatusCodes.NOT_FOUND );
         }
 
         const equipment = await guide.$relatedQuery<Equipment>( 'equipment' ).first();

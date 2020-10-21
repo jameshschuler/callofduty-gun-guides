@@ -1,5 +1,6 @@
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { INVALID_API_KEY } from '../lib/messages';
 import APIKeyService from '../services/apiKeyService';
 import { GenerateAPIKeyRequest } from '../types/request/generateAPIKeyRequest';
 import { BaseController } from './baseController';
@@ -20,7 +21,7 @@ export default class APIKeyController extends BaseController {
 
         this.router.post( '/', async ( req: express.Request, res: express.Response ) => {
             if ( !req.headers.api_key ) {
-                res.status( StatusCodes.FORBIDDEN ).json( { message: 'Invalid API Key.' } );
+                res.status( StatusCodes.FORBIDDEN ).json( { message: INVALID_API_KEY } );
                 return;
             }
 

@@ -1,9 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 import { QueryBuilder } from 'objection';
+import { INVALID_API_KEY } from 'src/lib/messages';
 import APIKey from '../../models/apiKey';
 import APIKeyService from '../../services/apiKeyService';
 
-function getAPIKey() {
+function getAPIKey () {
     return {
         username: 'bobbysmith',
         apiKey: 'testinganapikey',
@@ -44,7 +45,7 @@ describe( 'APIKeyService tests', () => {
         try {
             await apiKeyService.verifyAPIKey( 'somethingelsecrazy' );
         } catch ( err ) {
-            expect( err.message ).toBe( 'Invalid API key' );
+            expect( err.message ).toBe( INVALID_API_KEY );
             expect( err.statusCode ).toBe( StatusCodes.BAD_REQUEST );
         }
     } );
@@ -75,7 +76,7 @@ describe( 'APIKeyService tests', () => {
         try {
             await apiKeyService.verifyAPIKey( existingApiKey.apiKey, true );
         } catch ( err ) {
-            expect( err.message ).toBe( 'Invalid API key.' );
+            expect( err.message ).toBe( INVALID_API_KEY );
             expect( err.statusCode ).toBe( StatusCodes.BAD_REQUEST );
         }
     } );
