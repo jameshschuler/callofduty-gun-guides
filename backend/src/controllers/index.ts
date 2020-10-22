@@ -19,7 +19,7 @@ const apiKeyService = new APIKeyService();
 const router = express.Router();
 router.get( '/', ( req: express.Request, res: express.Response ) => {
     res.json( {
-        message: 'Welcome! 🐼',
+        message: 'Welcome! 👻',
     } );
 } );
 

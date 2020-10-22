@@ -16,6 +16,11 @@ const config = {
             ssl: true
         } as PgConnectionConfig
     },
+    production: {
+        client: 'pg',
+        useNullAsDefault: true,
+        connection: process.env.DATABASE_URL
+    },
     test: {
         client: 'pg',
         useNullAsDefault: true,
