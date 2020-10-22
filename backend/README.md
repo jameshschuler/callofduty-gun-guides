@@ -6,6 +6,7 @@ RESTful API for supporting the Call of Duty Gun Guides app.
 
 - [ ] Write unit tests for services
 - [ ] Seed remaining data
+- [ ] Move messages to reusable constants / functions
 
 ## Roadmap
 
