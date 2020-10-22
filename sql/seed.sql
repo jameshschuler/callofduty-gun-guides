@@ -12,13 +12,15 @@ insert into weapon_category (name) values ('Shotguns');
 insert into weapon_category (name) values ('Launchers');
 insert into weapon_category (name) values ('Melee');
 
--- Weapons (Black Ops 4)
+-- Black Ops 4
+
+-- Weapons
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('ICR-7', 0, 1, 1);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('Rampart 17', 10, 1, 1);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('MX9', 1, 1, 2);
 insert into weapon(name, unlock_level, game_id, weapon_category_id) values ('GKS', 13, 1, 2);
 
--- Game Weapon Categories (Black Ops 4)
+-- Game Weapon Categories
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 1);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 2);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 3);
@@ -29,7 +31,7 @@ insert into game_weapon_category(game_id, weapon_category_id) values (1, 7);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 8);
 insert into game_weapon_category(game_id, weapon_category_id) values (1, 9);
 
--- Perks (Black Ops 4)
+-- Perks
 insert into perk(name, unlock_level, game_id, tier) values ('Scavenger', 1, 1, 1);
 insert into perk(name, unlock_level, game_id, tier) values ('Engineer', 1, 1, 1);
 insert into perk(name, unlock_level, game_id, tier) values ('Flak Jacket', 12, 1, 1);
@@ -74,7 +76,6 @@ insert into weapon_attachment(weapon_id, attachment_id, unlock_level) values (1,
 insert into weapon_attachment(weapon_id, attachment_id, unlock_level) values (1, 2, null);
 
 -- Gear
--- Black Ops 4
 insert into gear(name, unlock_level, game_id) values ('Equipment Charge', null, 1);
 insert into gear(name, unlock_level, game_id) values ('Stim Shot', null, 1);
 insert into gear(name, unlock_level, game_id) values ('Comsec Device', null, 1);
@@ -82,7 +83,6 @@ insert into gear(name, unlock_level, game_id) values ('Body Armor', null, 1);
 insert into gear(name, unlock_level, game_id) values ('Acoustic Sensor', null, 1);
 
 -- Equipment
--- Black Ops 4 
 insert into equipment(name, unlock_level, equipment_type_id) values ('Trophy System', null, 2);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Combat Axe', null, 1);
 insert into equipment(name, unlock_level, equipment_type_id) values ('Frag', null, 1);
@@ -91,7 +91,6 @@ insert into equipment(name, unlock_level, equipment_type_id) values ('Concussion
 insert into equipment(name, unlock_level, equipment_type_id) values ('Special Issue', null, 3);
 
 -- Wildcards
--- Black Ops 4
 insert into wildcard(name, unlock_level, game_id) values ('Perk 1 Greed', 11, 1);
 insert into wildcard(name, unlock_level, game_id) values ('Perk 2 Greed', 14, 1);
 insert into wildcard(name, unlock_level, game_id) values ('Perk 3 Greed', 17, 1);
