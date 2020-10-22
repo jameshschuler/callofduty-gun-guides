@@ -4,6 +4,9 @@ import Attachment from './attachment';
 export default class Weapon extends Model {
     name: string;
     unlockLevel: number;
+    gameId: number;
+    weaponCategoryId: number;
+    weaponId: number;
 
     static get columnNameMappers() {
         return snakeCaseMappers();
@@ -11,6 +14,23 @@ export default class Weapon extends Model {
 
     static get tableName() {
         return 'weapon';
+    }
+
+    static get idColumn() {
+        return 'weapon_id';
+    }
+
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: [ 'gameId', 'name', 'weaponCategoryId' ],
+            properties: {
+                gameId: { type: 'integer' },
+                unlockLevel: { type: [ 'integer', 'null' ] },
+                name: { type: 'string', minLength: 1, maxLength: 100 },
+                weaponCategoryId: { type: 'integer' },
+            }
+        };
     }
 
     static relationMappings = {

@@ -4,6 +4,7 @@ import Weapon from './weapon';
 
 export default class Game extends Model {
     gameId: number;
+    name: string;
 
     static get columnNameMappers() {
         return snakeCaseMappers();
